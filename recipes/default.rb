@@ -120,9 +120,11 @@ script 'initialize squid cache dir' do
   not_if { node['platform_family'] =~ /(rhel|fedora)/ }
 end
 
-# services
-service squid_service_name do
-  supports restart: true, status: true, reload: true
-  action [:enable, :start]
-  retries 5
+if node['squid']['enabled']
+  # services
+  service squid_service_name do
+    supports restart: true, status: true, reload: true
+    action [:enable, :start]
+    retries 5
+  end
 end
