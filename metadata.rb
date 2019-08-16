@@ -7,7 +7,7 @@ long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 chef_version      '>= 13'
 source_url        'https://github.com/sous-chefs/squid'
 issues_url        'https://github.com/sous-chefs/squid/issues'
-version           '4.1.0'
+version           '4.1.1'
 
 %w(debian ubuntu centos redhat scientific suse amazon freebsd).each do |os|
   supports os

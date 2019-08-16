@@ -109,9 +109,13 @@ template node['squid']['config_file'] do
 end
 
 # squid swap dirs
-execute 'initialize squid cache dir' do
-  command "#{node['squid']['package']} -Nz"
-  action :run
+script 'initialize squid cache dir' do
+  interpreter "bash"
+  code <<-EOH
+    systemctl stop squid
+    #{node['squid']['package']} -Nz
+    EOH
+  user 'root'
   creates ::File.join(node['squid']['cache_dir'], '00')
   not_if { node['platform_family'] =~ /(rhel|fedora)/ }
 end
